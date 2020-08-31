@@ -70,8 +70,11 @@ stock PlayerGangZoneShow(playerid, gangzoneid, color = PLAYER_GZ_DEFAULT_COLOR)
 		PR_FLOAT, PlayerGangZoneData[playerid][gangzoneid][player_GZ_MaxY],
 		PR_UINT32, abgr_color
 	);
-		
-	PR_SendRPC(gz_bs, playerid, 0x6C);
+	#if defined PR_SendRPC
+		PR_SendRPC(gz_bs, playerid, 0x6C);
+	#else
+		BS_RPC(gz_bs, playerid, 0x6C);
+	#endif
 	BS_Delete(gz_bs);
 	return 1;
 }
@@ -89,8 +92,11 @@ stock PlayerGangZoneHide(playerid, gangzoneid)
 		gz_bs,
 		PR_UINT16, 1023 - gangzoneid
 	);
-		
-	PR_SendRPC(gz_bs, playerid, 0x78);
+	#if defined PR_SendRPC
+		PR_SendRPC(gz_bs, playerid, 0x78);
+	#else
+		BS_RPC(gz_bs, playerid, 0x78);
+	#endif
 	BS_Delete(gz_bs);
 	return 1;
 }
